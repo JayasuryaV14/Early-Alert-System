@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h2>Early Alert Dashboard</h2>
+  <a href="home.html">Logout</a>
+</header>
+
+<section class="stats">
+  <div class="card online">System Status: ONLINE</div>
+  <div class="card">Active Alerts: <span id="alertCount">0</span></div>
+  <div class="card">Response Time: <span id="response">--</span> ms</div>
+</section>
+
+<section class="monitor">
+  <h3>Network Monitoring</h3>
+
+  <input type="text" id="url" placeholder="Enter Website / IP Address">
+  <button onclick="startMonitoring()">Start Monitoring</button>
+
+  <div id="log"></div>
+
+  <a href="testing.html" class="test-btn">Go to Testing Page</a>
+</section>
+
+<script src="../js/monitor.js"></script>
+</body>
+</html>

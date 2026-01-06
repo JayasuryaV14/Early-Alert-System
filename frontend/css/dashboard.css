@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  background: #0f2027;
+  color: white;
+  font-family: Arial;
+}
+
+.topbar {
+  background: #203a43;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+  padding: 30px 40px;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  background: #2c5364;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.online {
+  background: #0f9b0f;
+}
+
+.monitor {
+  padding: 40px;
+}
+
+.monitor input {
+  width: 300px;
+  padding: 10px;
+}
+
+.monitor button {
+  padding: 10px 20px;
+  background: #00c6ff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+#log {
+  margin-top: 20px;
+  height: 150px;
+  background: rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.test-btn {
+  display: inline-block;
+  margin-top: 20px;
+  color: #00c6ff;
+}
