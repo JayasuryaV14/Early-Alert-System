@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Network Testing</title>
+  <link rel="stylesheet" href="../css/testing.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h2>Network Outage Testing</h2>
+  <a href="dashboard.html">Back to Dashboard</a>
+</header>
+
+<div class="container">
+
+  <div class="panel">
+    <h3>Test Connection</h3>
+    <input type="text" id="target" placeholder="Enter Website / IP">
+    <button onclick="startTest()">Start Test</button>
+  </div>
+
+  <div class="panel log">
+    <h3>Live Logs</h3>
+    <div id="logs"></div>
+  </div>
+
+  <div class="panel alerts">
+    <h3>Alerts</h3>
+    <div id="alerts"></div>
+  </div>
+
+</div>
+
+<script src="../js/alerts.js"></script>
+</body>
+</html>
