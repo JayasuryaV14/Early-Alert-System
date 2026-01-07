@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="../css/dashboard.css">
+<meta charset="UTF-8">
+<title>Early Alert Dashboard</title>
+<link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
 
 <header class="topbar">
-  <h2>Early Alert Dashboard</h2>
+  <h2>Early Alert System - Monitoring Dashboard</h2>
   <a href="home.html">Logout</a>
 </header>
 
 <section class="stats">
-  <div class="card online">System Status: ONLINE</div>
-  <div class="card">Active Alerts: <span id="alertCount">0</span></div>
+  <div class="card">Ping: <span id="ping">--</span> ms</div>
   <div class="card">Response Time: <span id="response">--</span> ms</div>
+  <div class="card">Packet Loss: <span id="loss">--</span> %</div>
+  <div class="card" id="status">Server: --</div>
 </section>
 
 <section class="monitor">
   <h3>Network Monitoring</h3>
 
   <input type="text" id="url" placeholder="Enter Website / IP Address">
-  <button onclick="startMonitoring()">Start Monitoring</button>
 
-  <div id="log"></div>
+  <div class="controls">
+    <button onclick="startMonitoring()">Start Monitoring</button>
+    <button onclick="stopMonitoring()" class="stop">Stop</button>
+  </div>
 
-  <a href="testing.html" class="test-btn">Go to Testing Page</a>
+  <div class="panels">
+    <div class="panel">
+      <h4>System Logs</h4>
+      <div id="log" class="log-box"></div>
+    </div>
+
+    <div class="panel">
+      <h4>Live Alerts</h4>
+      <div id="alerts" class="log-box"></div>
+    </div>
+  </div>
 </section>
 
 <script src="../js/monitor.js"></script>

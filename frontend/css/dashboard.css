@@ -61,3 +61,29 @@ body {
   margin-top: 20px;
   color: #00c6ff;
 }
+
+.stop {
+  background: #ff4c4c;
+  margin-left: 10px;
+}
+
+.panels {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.panel {
+  flex: 1;
+  background: #203a43;
+  padding: 15px;
+  border-radius: 10px;
+  height: 250px;
+  overflow-y: auto;
+}
+
+.graph-btn {
+  display: inline-block;
+  margin-top: 20px;
+  color: #00c6ff;
+}

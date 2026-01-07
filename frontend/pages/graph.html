@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Outage Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="background:#0f2027;color:white;text-align:center">
+
+<h2>Network Performance Graph</h2>
+<canvas id="myChart" width="400" height="200"></canvas>
+
+<script>
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['1','2','3','4','5','6','7'],
+    datasets: [{
+      label: 'Ping (ms)',
+      data: [40, 60, 55, 90, 120, 80, 45],
+      borderWidth: 2
+    }]
+  }
+});
+</script>
+
+</body>
+</html>
