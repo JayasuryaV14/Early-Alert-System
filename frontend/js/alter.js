@@ -14,5 +14,16 @@ setInterval(() => {
       <p style="color:red;">❌ ${time} | Status: Offline | Ping: Timeout | Packet Loss: 100%</p>
     `;
     alerts.innerHTML += `<p>🚨 OUTAGE detected at ${time}</p>`;
+    fetch("http://localhost:5000/api/monitor/log", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    target,
+    status: "OFFLINE",
+    ping: "Timeout",
+    time
+  })
+});
+
   }
 }, 3000);

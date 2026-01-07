@@ -7,4 +7,4 @@ const outageSchema = new mongoose.Schema({
   time: String
 });
 
-module.exports = mongoose.model("Outage", outageSchema);
+module.exports = mongoose.model("Outages", outageSchema);

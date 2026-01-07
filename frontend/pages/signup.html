@@ -8,11 +8,12 @@
 <body>
 
 <div class="auth-container">
-  <h2>Create Account</h2>
+<h2>Create Account</h2>
 
-  <input type="text" placeholder="Name">
-  <input type="email" placeholder="Email">
-  <input type="password" placeholder="Password">
+<input type="text" id="name" placeholder="Name">
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+<input type="password" id="confirmPassword" placeholder="Confirm Password">
   <br>
   <br>
 
@@ -23,8 +24,22 @@
   window.location.href = "login.html";
 }
 </script>
+<script>
+function signup() {
+  const password = document.getElementById("password").value;
+  const confirm = document.getElementById("confirmPassword").value;
 
-  </script>
+  if (password !== confirm) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  alert("Account created successfully!");
+  window.location.href = "dashboard.html";
+}
+</script>
+
+
 
   <p>Already have an account? <a href="login.html">Login</a></p>
 </div>
