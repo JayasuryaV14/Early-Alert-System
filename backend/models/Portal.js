@@ -7,7 +7,9 @@ const portalSchema = new mongoose.Schema({
   ping: { type: Number, default: 0 },
   response: { type: Number, default: 0 },
   packetLoss: { type: Number, default: 0 },
-  lastChecked: { type: String, default: "" }
+  lastChecked: { type: String, default: "" },
+  alertsEnabled: { type: Boolean, default: true },
+  lastEmailSent: { type: Date, default: null }
 }, { timestamps: true });
 
 module.exports = mongoose.model("Portal", portalSchema);

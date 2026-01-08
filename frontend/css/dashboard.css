@@ -85,6 +85,12 @@ body {
   font-size: 18px;
 }
 
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .delete-btn {
   background: #ef4444;
   border: none;
@@ -99,10 +105,40 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.2s;
 }
 
 .delete-btn:hover {
   background: #dc2626;
+}
+
+.alert-toggle-btn {
+  background: #2563eb;
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.alert-toggle-btn:hover {
+  background: #1d4ed8;
+}
+
+.alert-toggle-btn.disabled {
+  background: #6b7280;
+}
+
+.alert-toggle-btn.disabled:hover {
+  background: #4b5563;
 }
 
 .portal-url {
@@ -144,6 +180,9 @@ body {
 .status-online { color: #22c55e !important; }
 .status-offline { color: #ef4444 !important; }
 .status-unstable { color: #facc15 !important; }
+
+.stat-value.enabled { color: #22c55e !important; }
+.stat-value.disabled { color: #6b7280 !important; }
 
 .connection-status {
   display: flex;

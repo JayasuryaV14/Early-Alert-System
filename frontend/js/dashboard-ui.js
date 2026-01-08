@@ -128,10 +128,19 @@ function renderPortals() {
   portals.forEach(portal => {
     const card = document.createElement("div");
     card.className = "portal-card";
+    const alertsStatus = portal.alertsEnabled !== false ? "enabled" : "disabled";
+    const alertsIcon = portal.alertsEnabled !== false ? "🔔" : "🔕";
     card.innerHTML = `
       <div class="portal-header">
         <h4>${portal.name}</h4>
-        <button onclick="deletePortal('${portal._id}')" class="delete-btn">×</button>
+        <div class="header-actions">
+          <button onclick="toggleAlerts('${portal._id}', ${portal.alertsEnabled !== false})" 
+                  class="alert-toggle-btn ${alertsStatus}" 
+                  title="Toggle Email Alerts">
+            ${alertsIcon}
+          </button>
+          <button onclick="deletePortal('${portal._id}')" class="delete-btn" title="Delete Portal">×</button>
+        </div>
       </div>
       <div class="portal-url">${portal.url}</div>
       <div class="portal-stats">
@@ -154,6 +163,10 @@ function renderPortals() {
         <div class="stat">
           <span class="stat-label">Last Checked:</span>
           <span class="stat-value">${portal.lastChecked || "Never"}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Email Alerts:</span>
+          <span class="stat-value ${alertsStatus}">${portal.alertsEnabled !== false ? "Enabled" : "Disabled"}</span>
         </div>
       </div>
     `;
@@ -256,5 +269,36 @@ function updateCharts() {
   }
 }
 
-// Make deletePortal available globally
+// Toggle email alerts for a portal
+async function toggleAlerts(id, currentStatus) {
+  try {
+    const response = await fetch(`http://localhost:5000/api/portals/${id}/toggle-alerts`, {
+      method: "PATCH"
+    });
+    
+    if (response.ok) {
+      const result = await response.json();
+      // Update portal in local state
+      const portal = portals.find(p => p._id === id);
+      if (portal) {
+        portal.alertsEnabled = result.alertsEnabled;
+        renderPortals();
+      }
+      
+      // Show notification
+      const message = result.alertsEnabled 
+        ? "✅ Email alerts enabled for this portal" 
+        : "🔕 Email alerts disabled for this portal";
+      alert(message);
+    } else {
+      alert("Failed to toggle alerts");
+    }
+  } catch (error) {
+    console.error("Error toggling alerts:", error);
+    alert("Error toggling alerts");
+  }
+}
+
+// Make functions available globally
 window.deletePortal = deletePortal;
+window.toggleAlerts = toggleAlerts;

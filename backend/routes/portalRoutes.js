@@ -49,4 +49,25 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Toggle email alerts for a portal
+router.patch("/:id/toggle-alerts", async (req, res) => {
+  try {
+    const portal = await Portal.findById(req.params.id);
+    if (!portal) {
+      return res.status(404).json({ error: "Portal not found" });
+    }
+    
+    portal.alertsEnabled = !portal.alertsEnabled;
+    await portal.save();
+    
+    res.json({ 
+      success: true, 
+      alertsEnabled: portal.alertsEnabled,
+      message: portal.alertsEnabled ? "Email alerts enabled" : "Email alerts disabled"
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

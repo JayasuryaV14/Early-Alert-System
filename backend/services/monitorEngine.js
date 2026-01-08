@@ -79,10 +79,11 @@ module.exports = (io) => {
         ping: portal.ping,
         response: portal.response,
         packetLoss: portal.packetLoss,
-        lastChecked: portal.lastChecked
+        lastChecked: portal.lastChecked,
+        alertsEnabled: portal.alertsEnabled
       });
 
-      // Send alert if status is not ONLINE
+      // Send alert if status is not ONLINE (with 10-minute cooldown check inside sendAlert)
       if (status !== "ONLINE") {
         sendAlert(portal, status);
       }

@@ -8,6 +8,21 @@ const transporter = nodemailer.createTransport({
 
 exports.sendAlert = async (portal, status) => {
   try {
+    // Check if alerts are enabled for this portal
+    if (portal.alertsEnabled === false) {
+      return; // Alerts disabled for this portal
+    }
+
+    // Check if 10 minutes (600000 ms) have passed since last email
+    const now = new Date();
+    const lastEmailTime = portal.lastEmailSent ? new Date(portal.lastEmailSent) : null;
+    const tenMinutesInMs = 10 * 60 * 1000; // 10 minutes
+
+    if (lastEmailTime && (now - lastEmailTime) < tenMinutesInMs) {
+      // Less than 10 minutes since last email - skip sending
+      return;
+    }
+
     const users = await User.find();
     if (users.length === 0) return;
 
@@ -36,6 +51,10 @@ This is an automated alert from the Early Alert System.
       subject: subject,
       text: text
     });
+
+    // Update lastEmailSent timestamp in database
+    portal.lastEmailSent = now;
+    await portal.save();
 
     console.log(`📧 Alert email sent for ${portal.name} - ${status}`);
   } catch (error) {
