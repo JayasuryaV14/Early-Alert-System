@@ -2,14 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard - Early Alert System</title>
 <link rel="stylesheet" href="../css/dashboard.css">
+<script src="https://cdn.socket.io/4.8.3/socket.io.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
 
 <header class="header">
   <h2>DIGITAL <span>INDIA</span> MONITOR</h2>
+  <div class="connection-status" id="connectionStatus">
+    <span class="status-dot"></span>
+    <span id="connectionText">Connecting...</span>
+  </div>
 </header>
 
 <section class="summary">
@@ -22,11 +29,11 @@
 <section class="charts">
   <div class="chart-box">
     <h3>Live Status Snapshot</h3>
-    <div id="barChart"></div>
+    <canvas id="barChart"></canvas>
   </div>
   <div class="chart-box">
     <h3>Network Health</h3>
-    <div id="donutChart"></div>
+    <canvas id="donutChart"></canvas>
   </div>
 </section>
 

@@ -1,20 +1,52 @@
 const router = require("express").Router();
 const Portal = require("../models/Portal");
 
+// Store reference to monitor engine functions
+let monitorEngine = null;
+
+// Function to set monitor engine (called from server.js)
+router.setMonitorEngine = (engine) => {
+  monitorEngine = engine;
+};
+
 router.get("/", async (req, res) => {
-  const portals = await Portal.find();
-  res.json(portals);
+  try {
+    const portals = await Portal.find();
+    res.json(portals);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 router.post("/add", async (req, res) => {
-  const portal = new Portal(req.body);
-  await portal.save();
-  res.json(portal);
+  try {
+    const portal = await new Portal(req.body).save();
+    
+    // Start monitoring the new portal immediately
+    if (monitorEngine && monitorEngine.startMonitoring) {
+      monitorEngine.startMonitoring(portal._id.toString());
+    }
+    
+    res.json(portal);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 router.delete("/:id", async (req, res) => {
-  await Portal.findByIdAndDelete(req.params.id);
-  res.json({ success: true });
+  try {
+    const portalId = req.params.id;
+    
+    // Stop monitoring before deleting
+    if (monitorEngine && monitorEngine.stopMonitoring) {
+      monitorEngine.stopMonitoring(portalId);
+    }
+    
+    await Portal.findByIdAndDelete(portalId);
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 module.exports = router;

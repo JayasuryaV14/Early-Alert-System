@@ -3,33 +3,42 @@ const User = require("../models/User");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+  auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
 });
 
-exports.sendAlert = async (portal, reason) => {
-  const users = await User.find({}, "email");
-  const emails = users.map(u => u.email);
+exports.sendAlert = async (portal, status) => {
+  try {
+    const users = await User.find();
+    if (users.length === 0) return;
 
-  if (emails.length === 0) return;
-
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: emails.join(","),
-    subject: `🚨 Network Outage Alert — ${portal.name}`,
-    text: `Hello,
-
-An outage has been detected.
+    const emails = users.map(u => u.email).join(", ");
+    
+    const statusEmoji = status === "OFFLINE" ? "🔴" : "⚠️";
+    const subject = `${statusEmoji} Alert: ${portal.name} - ${status}`;
+    
+    const text = `
+🚨 NETWORK MONITORING ALERT
 
 Portal: ${portal.name}
 URL: ${portal.url}
-Issue: ${reason}
-Time: ${new Date().toLocaleString()}
+Status: ${status}
+Ping: ${portal.ping}ms
+Response Time: ${portal.response}ms
+Packet Loss: ${portal.packetLoss}%
+Time: ${portal.lastChecked}
 
-Please check the system dashboard for live updates.
+This is an automated alert from the Early Alert System.
+    `.trim();
 
-— Early Alert System`
-  });
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: emails,
+      subject: subject,
+      text: text
+    });
+
+    console.log(`📧 Alert email sent for ${portal.name} - ${status}`);
+  } catch (error) {
+    console.error("Error sending alert email:", error);
+  }
 };
