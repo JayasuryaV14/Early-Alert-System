@@ -2,46 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Early Alert Dashboard</title>
+<title>Dashboard - Early Alert System</title>
 <link rel="stylesheet" href="../css/dashboard.css">
 </head>
+
 <body>
 
-<header class="topbar">
-  <h2>Early Alert System - Monitoring Dashboard</h2>
-  <a href="home.html">Logout</a>
+<header class="header">
+  <h2>DIGITAL <span>INDIA</span> MONITOR</h2>
 </header>
 
-<section class="stats">
-  <div class="card">Ping: <span id="ping">--</span> ms</div>
-  <div class="card">Response Time: <span id="response">--</span> ms</div>
-  <div class="card">Packet Loss: <span id="loss">--</span> %</div>
-  <div class="card" id="status">Server: --</div>
+<section class="summary">
+  <div class="card"><h3 id="total">0</h3><p>Total Portals</p></div>
+  <div class="card green"><h3 id="online">0</h3><p>Online</p></div>
+  <div class="card red"><h3 id="offline">0</h3><p>Offline</p></div>
+  <div class="card yellow"><h3 id="unstable">0</h3><p>Unstable</p></div>
 </section>
 
-<section class="monitor">
-  <h3>Network Monitoring</h3>
-
-  <input type="text" id="url" placeholder="Enter Website / IP Address">
-
-  <div class="controls">
-    <button onclick="startMonitoring()">Start Monitoring</button>
-    <button onclick="stopMonitoring()" class="stop">Stop</button>
+<section class="charts">
+  <div class="chart-box">
+    <h3>Live Status Snapshot</h3>
+    <div id="barChart"></div>
   </div>
-
-  <div class="panels">
-    <div class="panel">
-      <h4>System Logs</h4>
-      <div id="log" class="log-box"></div>
-    </div>
-
-    <div class="panel">
-      <h4>Live Alerts</h4>
-      <div id="alerts" class="log-box"></div>
-    </div>
+  <div class="chart-box">
+    <h3>Network Health</h3>
+    <div id="donutChart"></div>
   </div>
 </section>
 
-<script src="../js/monitor.js"></script>
+<section class="monitors">
+  <div class="monitors-header">
+    <h3>Active Monitors</h3>
+    <button id="addPortalBtn">+ Add Portal</button>
+  </div>
+  <div id="portalList"></div>
+</section>
+
+<script src="../js/dashboard-ui.js"></script>
+
 </body>
 </html>

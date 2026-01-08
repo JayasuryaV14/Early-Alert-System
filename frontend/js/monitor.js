@@ -1,62 +1,51 @@
-let monitoringInterval;
-let monitoring = false;
+let timer;
 
 function startMonitoring() {
-  if (monitoring) return;
+  const url = document.getElementById("url").value;
+  if (!url) return alert("Enter a target");
 
-  const target = document.getElementById("url").value;
-  const log = document.getElementById("log");
-  const alerts = document.getElementById("alerts");
+  timer = setInterval(async () => {
+    const start = performance.now();
 
-  if (!target) {
-    alert("Please enter a website or IP address");
-    return;
-  }
+    let status = "ONLINE";
+    let packetLoss = Math.floor(Math.random() * 4);
+    let ping = Math.floor(Math.random() * 150) + 20;
 
-  monitoring = true;
-  log.innerHTML += `<p>🔍 Monitoring started for <b>${target}</b></p>`;
+    try {
+      await fetch("https://" + url, { mode: "no-cors" });
+    } catch {
+      status = "OFFLINE";
+      packetLoss = 100;
+    }
 
-  monitoringInterval = setInterval(() => {
-
-    const ping = Math.floor(Math.random() * 1600) + 50;
-    const response = Math.floor(Math.random() * 1200) + 100;
-    const loss = Math.random() > 0.9 ? 100 : Math.floor(Math.random() * 6);
+    const response = Math.floor(performance.now() - start);
 
     document.getElementById("ping").innerText = ping;
     document.getElementById("response").innerText = response;
-    document.getElementById("loss").innerText = loss;
+    document.getElementById("packetLoss").innerText = packetLoss;
+    document.getElementById("status").innerText = status;
 
-    let serverStatus = "ONLINE";
-    let networkStatus = "NORMAL";
+    const log = document.getElementById("log");
+    log.innerHTML += `<p>${new Date().toLocaleTimeString()} | ${status} | Ping ${ping}ms | Resp ${response}ms | Loss ${packetLoss}%</p>`;
 
-    if (ping > 1500 || response > 1000 || loss > 5) {
-      serverStatus = "OFFLINE";
-      networkStatus = "CRITICAL";
-    }
-    else if (ping > 300 || response > 800 || loss > 1) {
-      networkStatus = "SLOW";
-    }
-
-    document.getElementById("status").innerText = "Server: " + serverStatus;
-
-    const time = new Date().toLocaleTimeString();
-
-    if (serverStatus === "OFFLINE") {
-      log.innerHTML += `<p style="color:red;">🚨 ${time} - OUTAGE DETECTED</p>`;
-      alerts.innerHTML += `<p>⚠️ ${time} - Service Down</p>`;
+    if (status === "OFFLINE" || response > 1000 || packetLoss > 5) {
+      document.getElementById("statusBox").style.background = "#ff4c4c";
+      sendAlert(url, ping, response, packetLoss, status);
     } else {
-      log.innerHTML += `<p>✅ ${time} - Healthy (${networkStatus})</p>`;
+      document.getElementById("statusBox").style.background = "#0f9b0f";
     }
-
-    log.scrollTop = log.scrollHeight;
-    alerts.scrollTop = alerts.scrollHeight;
 
   }, 3000);
 }
 
 function stopMonitoring() {
-  clearInterval(monitoringInterval);
-  monitoring = false;
+  clearInterval(timer);
+}
 
-  document.getElementById("log").innerHTML += `<p>⛔ Monitoring stopped</p>`;
+function sendAlert(target, ping, response, loss, status) {
+  fetch("http://localhost:5000/api/monitor/log", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ target, ping, response, loss, status, time: new Date().toLocaleTimeString() })
+  });
 }
