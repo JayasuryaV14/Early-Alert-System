@@ -1,10 +1,9 @@
 const router = require("express").Router();
 const Portal = require("../models/Portal");
 
-// Store reference to monitor engine functions
+
 let monitorEngine = null;
 
-// Function to set monitor engine (called from server.js)
 router.setMonitorEngine = (engine) => {
   monitorEngine = engine;
 };
@@ -21,8 +20,7 @@ router.get("/", async (req, res) => {
 router.post("/add", async (req, res) => {
   try {
     const portal = await new Portal(req.body).save();
-    
-    // Start monitoring the new portal immediately
+  
     if (monitorEngine && monitorEngine.startMonitoring) {
       monitorEngine.startMonitoring(portal._id.toString());
     }
@@ -37,7 +35,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const portalId = req.params.id;
     
-    // Stop monitoring before deleting
+  
     if (monitorEngine && monitorEngine.stopMonitoring) {
       monitorEngine.stopMonitoring(portalId);
     }
@@ -49,7 +47,6 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// Toggle email alerts for a portal
 router.patch("/:id/toggle-alerts", async (req, res) => {
   try {
     const portal = await Portal.findById(req.params.id);

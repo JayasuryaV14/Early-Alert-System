@@ -24,9 +24,21 @@ exports.sendAlert = async (portal, status) => {
     }
 
     const users = await User.find();
-    if (users.length === 0) return;
+    if (users.length === 0 && (!portal.additionalEmails || portal.additionalEmails.length === 0)) return;
 
-    const emails = users.map(u => u.email).join(", ");
+    // Base recipients: all registered users
+    const userEmails = users.map(u => u.email);
+
+    // Additional recipients configured per portal
+    const extraEmails = Array.isArray(portal.additionalEmails)
+      ? portal.additionalEmails
+      : portal.additionalEmails
+      ? String(portal.additionalEmails).split(",").map(e => e.trim()).filter(Boolean)
+      : [];
+
+    // Merge and deduplicate
+    const allEmails = [...new Set([...userEmails, ...extraEmails])];
+    if (allEmails.length === 0) return;
     
     const statusEmoji = status === "OFFLINE" ? "🔴" : "⚠️";
     const subject = `${statusEmoji} Alert: ${portal.name} - ${status}`;
@@ -47,7 +59,7 @@ This is an automated alert from the Early Alert System.
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: emails,
+      to: allEmails.join(", "),
       subject: subject,
       text: text
     });

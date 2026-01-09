@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const portalSchema = new mongoose.Schema({
   name: String,
   url: String,
+  // Additional notification recipients specific to this portal
+  additionalEmails: { type: [String], default: [] },
   status: { type: String, default: "ONLINE" },
   ping: { type: Number, default: 0 },
   response: { type: Number, default: 0 },

@@ -69,12 +69,28 @@ async function addPortal() {
   
   const url = prompt("Enter Portal URL (e.g., google.com):");
   if (!url) return;
+
+  // Step to collect additional email IDs
+  // User can enter comma-separated emails, or type "none" / leave blank for no extra recipients
+  const extraEmailInput = prompt(
+    'Enter additional notification email IDs (comma-separated).\n' +
+    'Example: admin@example.com, ops@example.com\n' +
+    'Type "none" or leave blank if there are no additional recipients.'
+  );
+
+  let additionalEmails = [];
+  if (extraEmailInput && extraEmailInput.trim().toLowerCase() !== "none") {
+    additionalEmails = extraEmailInput
+      .split(",")
+      .map(e => e.trim())
+      .filter(Boolean);
+  }
   
   try {
     const response = await fetch("http://localhost:5000/api/portals/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, url })
+      body: JSON.stringify({ name, url, additionalEmails })
     });
     
     if (response.ok) {
