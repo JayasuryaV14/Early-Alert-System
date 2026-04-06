@@ -124,14 +124,19 @@ Status Code → Meaning
 
 ---
 🚀 How to Clone and Run the Project
+
 1️⃣ Clone the Repository
 
 Open terminal / command prompt and run:
 
 git clone https://github.com/your-username/early-alert-system.git
+
 2️⃣ Go to Project Folder
+
 cd early-alert-system
+
 ▶️ Running the Project
+
 ⚙️ Backend Setup
 
 Navigate to backend folder
@@ -155,19 +160,24 @@ node server.js
 
 🎨 Frontend Setup
 
-Method 1 (Simple)
+=>Method 1 (Simple)
+
 Go to frontend/ folder
+
 Double-click index.html
 
-Method 2 (Recommended)
+=>Method 2 (Recommended)
 
 Using Visual Studio Code:
 
 Open project folder
+
 Right-click index.html
+
 Click "Open with Live Server"
 
 🌐 Open in Browser
+
 http://localhost:5000
 
 ✅ Final Output
