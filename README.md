@@ -118,11 +118,15 @@ EMAIL_PASS=your_email_password
 📡 How It Works
 
 Status Code → Meaning
+
 200 → Server is working
+
 400 → Client-side error
+
 500 → Server error
 
 ---
+
 🚀 How to Clone and Run the Project
 
 1️⃣ Clone the Repository
@@ -131,40 +135,51 @@ Open terminal / command prompt and run:
 
 git clone https://github.com/your-username/early-alert-system.git
 
+
 2️⃣ Go to Project Folder
 
 cd early-alert-system
+
 
 ▶️ Running the Project
 
 ⚙️ Backend Setup
 
-Navigate to backend folder
+=>Navigate to backend folder
 
 cd backend
 
-Install dependencies
+
+
+=>Install dependencies
 
 npm install
 
-Create .env file and add:
+
+
+=>Create .env file and add:
 
 PORT=5000  
 MONGO_URI=your_mongodb_connection_string  
 EMAIL_USER=your_email@gmail.com  
 EMAIL_PASS=your_email_password  
 
-Start the server
+
+=>Start the server
 
 node server.js
 
+
+
 🎨 Frontend Setup
+
 
 =>Method 1 (Simple)
 
 Go to frontend/ folder
 
 Double-click index.html
+
 
 =>Method 2 (Recommended)
 
@@ -176,9 +191,12 @@ Right-click index.html
 
 Click "Open with Live Server"
 
+
 🌐 Open in Browser
 
 http://localhost:5000
+
+
 
 ✅ Final Output
 
