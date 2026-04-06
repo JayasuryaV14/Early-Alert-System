@@ -1,6 +1,4 @@
-Got it 👍 — here is your **README in clean TEXT format (no code block, just copy-paste directly into GitHub editor)**:
 
----
 
 # 📡 Early Alert System for Network Outages
 
