@@ -1,8 +1,8 @@
 
 
-# 📡 Early Alert System for Network Outages
+📡 Early Alert System for Network Outages
 
-## 🚀 Project Overview
+🚀 Project Overview
 
 The Early Alert System is a Node.js-based real-time monitoring system designed to detect network outages in Digital India portals and notify users and administrators instantly.
 
@@ -10,7 +10,7 @@ The system continuously monitors server health using HTTP requests and ICMP (pin
 
 ---
 
-## 🎯 Problem Statement
+🎯 Problem Statement
 
 Government portals often face unstable network connectivity, which leads to:
 
@@ -22,7 +22,7 @@ This project solves the problem by providing continuous monitoring and instant a
 
 ---
 
-## 💡 Solution
+💡 Solution
 
 The system performs periodic checks on servers by:
 
@@ -38,7 +38,7 @@ If any abnormal activity is detected, alerts are triggered and sent to administr
 
 ---
 
-## ⚙️ Features
+⚙️ Features
 
 * Real-time server monitoring
 * HTTP status code tracking (200, 400, 500)
@@ -49,24 +49,24 @@ If any abnormal activity is detected, alerts are triggered and sent to administr
 
 ---
 
-## 🛠️ Tech Stack
+🛠️ Tech Stack
 
-### Frontend
+Frontend
 
 * HTML5
 * CSS3
 * JavaScript
 
-### Backend
+Backend
 
 * Node.js
 * Express.js
 
-### Database
+Database
 
 * MongoDB
 
-### Tools & Protocols
+Tools & Protocols
 
 * HTTP
 * ICMP (Ping)
@@ -74,7 +74,7 @@ If any abnormal activity is detected, alerts are triggered and sent to administr
 
 ---
 
-## 🧠 System Architecture
+🧠 System Architecture
 
 Workflow:
 
@@ -86,7 +86,7 @@ Workflow:
 
 ---
 
-## 🔔 Alert System
+🔔 Alert System
 
 The alert system is implemented using:
 
@@ -101,7 +101,7 @@ Alerts are triggered when:
 
 ---
 
-## 🔐 Environment Variables
+🔐 Environment Variables
 
 Create a `.env` file inside the backend folder:
 
@@ -115,7 +115,7 @@ EMAIL_PASS=your_email_password
 
 ---
 
-## 📡 How It Works
+📡 How It Works
 
 Status Code → Meaning
 200 → Server is working
@@ -152,6 +152,7 @@ EMAIL_PASS=your_email_password
 Start the server
 
 node server.js
+
 🎨 Frontend Setup
 
 Method 1 (Simple)
@@ -170,14 +171,17 @@ Click "Open with Live Server"
 http://localhost:5000
 
 ✅ Final Output
+
 Backend server starts successfully
+
 Frontend loads in browser
+
 Monitoring system begins working
 
 ---
 
 
-## 📈 Future Enhancements
+📈 Future Enhancements
 
 * SMS and WhatsApp alerts
 * Live monitoring dashboard
@@ -186,7 +190,7 @@ Monitoring system begins working
 
 ---
 
-## 🤝 Contributing
+🤝 Contributing
 
 1. Fork the repository
 2. Create a new branch
@@ -196,13 +200,13 @@ Monitoring system begins working
 ---
 
 
-## 👨‍💻 Author
+👨‍💻 Author
 
 Jayasurya V
 
 ---
 
-## ⭐ Support
+⭐ Support
 
 If you like this project, give it a star on GitHub!
 
