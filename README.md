@@ -106,8 +106,11 @@ Alerts are triggered when:
 Create a `.env` file inside the backend folder:
 
 PORT=5000
+
 MONGO_URI=your_mongodb_connection_string
+
 EMAIL_USER=your_email@gmail.com
+
 EMAIL_PASS=your_email_password
 
 ---
@@ -192,15 +195,10 @@ Monitoring system begins working
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
 
 ## 👨‍💻 Author
 
-V Jaya Surya
+Jayasurya V
 
 ---
 
